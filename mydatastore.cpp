@@ -126,6 +126,9 @@ void MyDataStore::addToCart(std::string username, Product* p){
     User* currUser = findUser(username);
     if (currUser){
         cart_[currUser].push_back(p);
+
+        //TEST
+        std::cout << "Added to cart: " << p->displayString() << std::endl;
     }
     else {
         std::cout << "Invalid request" << std::endl;
