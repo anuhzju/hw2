@@ -55,7 +55,10 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string> &terms, int t
             std::set<std::string> lowerProdKW;
 
             for (std::set<std::string>::iterator pIt = prodKW.begin(); pIt != prodKW.end(); ++pIt){
-                lowerProdKW.insert(convToLower(*pIt));
+                std::set<std::string> parsedProdWords = parseStringToWords(*pIt);
+                for (std::set<std::string>::iterator ppIt = parsedProdWords.begin(); ppIt != parsedProdWords.end(); ++ppIt){
+                    lowerProdKW.insert(convToLower(*ppIt)); // Convert product keywords to lowercase
+                }
             }
 
             bool containsAll = true;
@@ -78,7 +81,10 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string> &terms, int t
             std::set<std::string> lowerProdKW;
 
             for (std::set<std::string>::iterator pIt = prodKW.begin(); pIt != prodKW.end(); ++pIt){
-                lowerProdKW.insert(convToLower(*pIt));
+                std::set<std::string> parsedProdWords = parseStringToWords(*pIt);
+                for (std::set<std::string>::iterator ppIt = parsedProdWords.begin(); ppIt != parsedProdWords.end(); ++ppIt){
+                    lowerProdKW.insert(convToLower(*ppIt)); // Convert product keywords to lowercase
+                }
             }
             
             bool containAny = false;
