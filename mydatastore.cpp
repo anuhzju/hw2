@@ -48,11 +48,16 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string> &terms, int t
         validTerms.insert(parsedWords.begin(), parsedWords.end());
     }
 
-    std::set<Product*>::iterator it;
     // AND (intersection)
     if (type == 0){
-        for (it = products_.begin(); it != products_.end(); ++it){
+        for (std::set<Product*>::iterator it = products_.begin(); it != products_.end(); ++it){
             std::set<std::string> prodKW = (*it)->keywords();
+            std::set<std::string> lowerProdKW;
+
+            for (std::set<std::string>::iterator pIt = prodKW.begin(); pIt != prodKW.end(); ++pIt){
+                lowerProdKW.insert(convToLower(*pIt));
+            }
+
             if (setIntersection(prodKW, validTerms).size() == validTerms.size()){
                 result.push_back(*it);
             }
@@ -60,8 +65,14 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string> &terms, int t
     }
     // OR (union)
     if (type == 1){
-        for (it = products_.begin(); it != products_.end(); ++it){
+        for (std::set<Product*>::iterator it = products_.begin(); it != products_.end(); ++it){
             std::set<std::string> prodKW = (*it)->keywords();
+            std::set<std::string> lowerProdKW;
+
+            for (std::set<std::string>::iterator pIt = prodKW.begin(); pIt != prodKW.end(); ++pIt){
+                lowerProdKW.insert(convToLower(*pIt));
+            }
+            
             if (!setIntersection(prodKW, validTerms).empty()){
                 result.push_back(*it);
             }
