@@ -139,6 +139,7 @@ void MyDataStore::viewCart(std::string username){
         for (Product *p : cart_[currUser]){
             std::cout << index << ". ";
             std::cout << p -> displayString() << std::endl;
+            index++;
         }
     }
     else {
