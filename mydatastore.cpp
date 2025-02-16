@@ -153,8 +153,8 @@ void MyDataStore::viewCart(std::string username){
 void MyDataStore::buyCart(std::string username){
     User* currUser = findUser(username);
     if (currUser){
-        std::list<Product*>::iterator it;
-        for (it = cart_[currUser].begin(); it != cart_[currUser].end(); ++it){
+        std::list<Product*>::iterator it = cart_[currUser].begin();
+        while (it != cart_[currUser].end()){
             if ((currUser -> getBalance() >= (*it) -> getPrice())
                 && ((*it) -> getQty() > 0)){
                 currUser->deductAmount((*it) -> getPrice());
