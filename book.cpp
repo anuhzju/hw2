@@ -45,3 +45,9 @@ std::string Book::displayString() const{
 void Book::dump(std::ostream& os) const{
     os << "book\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << isbn_ << "\n" << author_ << std::endl;
 }
+
+std::string Book::displayInfo() const{
+    std::ostringstream os;
+    os << "Author: " << author_ << " ISBN: " << isbn_;
+    return os.str();
+}

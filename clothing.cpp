@@ -43,3 +43,9 @@ std::string Clothing::displayString() const{
 void Clothing::dump(std::ostream& os) const{
     os << "clothing\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << size_ << "\n" << brand_ << std::endl;
 }
+
+std::string Clothing::displayInfo() const{
+    std::ostringstream os;
+    os << "Size: " << size_ << " Brand: " << brand_;
+    return os.str();
+}

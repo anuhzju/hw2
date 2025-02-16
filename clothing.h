@@ -16,6 +16,7 @@ public:
     std::set<std::string> keywords() const override;
     std::string displayString() const override;
     void dump(std::ostream& os) const override;
+    std::string displayInfo() const override;
     
 private:
     std::string size_;

@@ -39,6 +39,9 @@ public:
     int getQty() const;
     void subtractQty(int num);
 
+    //i added this
+    virtual std::string displayInfo() const = 0;
+
 protected:
     std::string name_;
     double price_;

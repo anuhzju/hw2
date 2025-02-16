@@ -39,3 +39,9 @@ std::string Movie::displayString() const{
 void Movie::dump(std::ostream& os) const{
     os << "movie\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << genre_ << "\n" << rating_ << std::endl;
 }
+
+std::string Movie::displayInfo() const{
+    std::ostringstream os;
+    os << "Genre: " << genre_ << " Rating: " << rating_;
+    return os.str();
+}

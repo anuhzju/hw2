@@ -4,6 +4,8 @@
 #include <string>
 #include <set>
 #include <vector>
+#include <sstream>
+#include <iomanip>
 
 MyDataStore::MyDataStore() {}
 
@@ -135,11 +137,15 @@ void MyDataStore::addToCart(std::string username, Product* p){
 void MyDataStore::viewCart(std::string username){
     User* currUser = findUser(username);
     if (currUser){
-        int index = 1;
+        //int index = 1;
         for (Product *p : cart_[currUser]){
-            std::cout << index << ". ";
-            std::cout << p -> displayString() << std::endl;
-            index++;
+            std::cout << "name: " << p -> getName() << "," << std::endl;
+            std::cout << "info: " << p -> displayInfo() << "," << std::endl;
+            std::cout << "stock: " << p -> getQty() << "," << std::endl;
+            std::ostringstream os;
+            os << std::fixed << std::setprecision(2) << p -> getPrice();
+            std::cout << "price: " << os.str();
+            //index++;
         }
     }
     else {
