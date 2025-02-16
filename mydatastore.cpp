@@ -53,7 +53,7 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string> &terms, int t
     if (type == 0){
         for (it = products_.begin(); it != products_.end(); ++it){
             std::set<std::string> prodKW = (*it)->keywords();
-            if (setIntersection(validTerms, prodKW) == validTerms){
+            if (setIntersection(prodKW, validTerms).size() == validTerms.size()){
                 result.push_back(*it);
             }
         }
