@@ -111,7 +111,7 @@ int main(int argc, char* argv[])
                     cout << "Invalid request" << endl;
                 }
                 else {
-                    ds.addToCart(username, hits[hitIndex] - 1);
+                    ds.addToCart(username, hits[hitIndex - 1]);
                 }
             }
 
