@@ -5,9 +5,9 @@
 #include <set>
 #include <vector>
 
-MyDataStore::MyDataStore(){}
+MyDataStore::MyDataStore() {}
 
-MyDataStore::~MyDataStore(){}
+MyDataStore::~MyDataStore() {}
 
 void MyDataStore::addProduct(Product *p)
 {
