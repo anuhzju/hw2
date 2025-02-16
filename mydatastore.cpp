@@ -58,13 +58,21 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string> &terms, int t
                 lowerProdKW.insert(convToLower(*pIt));
             }
 
-            if (setIntersection(prodKW, validTerms).size() == validTerms.size()){
+            bool containsAll = true;
+            for (std::set<std::string>::iterator vIt = validTerms.begin(); vIt != validTerms.end(); ++vIt){
+                if (lowerProdKW.find(*vIt) == lowerProdKW.end()){ // FIXED CHECK
+                    containsAll = false;
+                    break;
+                }
+            }
+
+            if (containsAll){
                 result.push_back(*it);
             }
         }
     }
     // OR (union)
-    if (type == 1){
+    else if (type == 1){
         for (std::set<Product*>::iterator it = products_.begin(); it != products_.end(); ++it){
             std::set<std::string> prodKW = (*it)->keywords();
             std::set<std::string> lowerProdKW;
@@ -73,7 +81,15 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string> &terms, int t
                 lowerProdKW.insert(convToLower(*pIt));
             }
             
-            if (!setIntersection(prodKW, validTerms).empty()){
+            bool containAny = false;
+            for (std::set<std::string>::iterator vIt = validTerms.begin(); vIt != validTerms.end(); ++vIt){
+                if (lowerProdKW.find(*vIt) != lowerProdKW.end()){ // FIXED CHECK
+                    containAny = true;
+                    break;
+                }
+            }
+
+            if (containAny){
                 result.push_back(*it);
             }
         }
