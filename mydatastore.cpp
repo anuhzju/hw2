@@ -39,22 +39,30 @@ void MyDataStore::addUser(User *u)
 std::vector<Product*> MyDataStore::search(std::vector<std::string> &terms, int type)
 {
     std::vector<Product*> result;
-    std::set<std::string> termsSet(terms.begin(), terms.end()); //turn terms from vector to set
+
+    // parse terms into valid words and store in validTerms
+    std::set<std::string> validTerms;
+    std::vector<std::string>::iterator tIt;
+    for (tIt = terms.begin(); tIt != terms.end(); tIt++){
+        std::set<std::string> parsedWords = parseStringToWords(*tIt);
+        validTerms.insert(parsedWords.begin(), parsedWords.end());
+    }
+
     std::set<Product*>::iterator it;
-    //AND (intersection)
+    // AND (intersection)
     if (type == 0){
         for (it = products_.begin(); it != products_.end(); ++it){
             std::set<std::string> prodKW = (*it)->keywords();
-            if (!setIntersection(prodKW, termsSet).empty()){
+            if (!setIntersection(prodKW, validTerms).empty()){
                 result.push_back(*it);
             }
         }
     }
-    //OR (union)
+    // OR (union)
     if (type == 1){
         for (it = products_.begin(); it != products_.end(); ++it){
             std::set<std::string> prodKW = (*it)->keywords();
-            if (!setUnion(prodKW, termsSet).empty()){
+            if (!setUnion(prodKW, validTerms).empty()){
                 result.push_back(*it);
             }
         }

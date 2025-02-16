@@ -45,6 +45,7 @@ std::set<std::string> parseStringToWords(string rawWords)
 
 // Used from http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
 // trim from start
+/*
 std::string &ltrim(std::string &s) {
     s.erase(s.begin(), 
 	    std::find_if(s.begin(), 
@@ -67,3 +68,4 @@ std::string &rtrim(std::string &s) {
 std::string &trim(std::string &s) {
     return ltrim(rtrim(s));
 }
+*/
