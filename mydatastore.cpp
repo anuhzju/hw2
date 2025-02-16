@@ -144,7 +144,7 @@ void MyDataStore::viewCart(std::string username){
             std::cout << "stock: " << p -> getQty() << "," << std::endl;
             std::ostringstream os;
             os << std::fixed << std::setprecision(2) << p -> getPrice();
-            std::cout << "price: " << os.str();
+            std::cout << "price: " << os.str() << std::endl;
             //index++;
         }
     }
