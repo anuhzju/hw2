@@ -35,7 +35,11 @@ std::set<std::string> Book::keywords() const{
 
 //display when outputting a hit
 std::string Book::displayString() const{
-    return name_ + "\n" + "Author: " + author_ + " ISBN: " + isbn_ + "\n" + std::to_string(price_) + " " + std::to_string(qty_) + " left.";
+    std::ostringstream os;
+    
+    os << name_ << "\n" << "Author: " << author_ << " ISBN: " << isbn_ << "\n"
+        << std::fixed << std::setprecision(2) << price_ << " " << qty_ << " left.\n";
+    return os.str();
 }
 
 void Book::dump(std::ostream& os) const{

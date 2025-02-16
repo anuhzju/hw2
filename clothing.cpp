@@ -1,5 +1,7 @@
 #include "clothing.h"
 #include <sstream>
+#include <iomanip>
+
 
 //constructor
 Clothing::Clothing(const std::string& category, const std::string& name, double price, int qty,
@@ -31,7 +33,11 @@ std::set<std::string> Clothing::keywords() const{
 
 //display when outputting a hit
 std::string Clothing::displayString() const{
-    return name_ + "\n" + "Size: " + size_ + " Brand: " + brand_ + "\n" + std::to_string(price_) + " " + std::to_string(qty_) + " left.";
+    std::ostringstream os;
+    
+    os << name_ << "\n" << "Size: " << size_ << " Brand: " << brand_ << "\n"
+        << std::fixed << std::setprecision(2) << price_ << " " << qty_ << " left.\n";
+    return os.str();
 }
 
 void Clothing::dump(std::ostream& os) const{

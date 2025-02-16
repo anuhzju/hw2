@@ -7,7 +7,24 @@
 
 MyDataStore::MyDataStore() {}
 
-MyDataStore::~MyDataStore() {}
+MyDataStore::~MyDataStore() {
+    //delete products_
+    std::set<Product*>::iterator pIt;
+    for(pIt = products_.begin(); pIt != products_.end(); ++pIt){
+        delete *pIt;
+    }
+    //delete users_
+    std::set<User*>::iterator uIt;
+    for(uIt = users_.begin(); uIt != users_.end(); ++uIt){
+        delete *uIt;
+    }
+    //delete cart_
+    std::map<User*, std::list<Product*>>::iterator cIt;
+    for (cIt = cart_.begin(); cIt != cart_.end(); ++cIt){
+        cIt -> second.clear();
+    }
+    cart_.clear();
+}
 
 void MyDataStore::addProduct(Product *p)
 {

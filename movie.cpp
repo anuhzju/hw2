@@ -1,5 +1,7 @@
 #include "movie.h"
 #include <sstream>
+#include <iomanip>
+
 
 //constructor
 Movie::Movie(const std::string& category, const std::string& name, double price, int qty,
@@ -27,7 +29,11 @@ std::set<std::string> Movie::keywords() const{
 
 //display when outputting a hit
 std::string Movie::displayString() const{
-    return name_ + "\n" + "Genre: " + genre_ + " Rating: " + rating_ + "\n" + std::to_string(price_) + " " + std::to_string(qty_) + " left.";
+    std::ostringstream os;
+    
+    os << name_ << "\n" << "Genre: " << genre_ << " Rating: " << rating_ << "\n"
+        << std::fixed << std::setprecision(2) << price_ << " " << qty_ << " left.\n";
+    return os.str();
 }
 
 void Movie::dump(std::ostream& os) const{
