@@ -25,7 +25,7 @@ class MyDataStore : public DataStore{
     private:
         std::set<Product*> products_; 
         std::set<User*> users_;
-        std::map<User*, std::list<Product*>> cart_;
+        std::map<std::string, std::list<Product*>> cart_;
 
         //helper function to find user from username
         User* findUser(std::string username) const;

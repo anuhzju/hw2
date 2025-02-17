@@ -21,7 +21,7 @@ MyDataStore::~MyDataStore() {
         delete *uIt;
     }
     //delete cart_
-    std::map<User*, std::list<Product*>>::iterator cIt;
+    std::map<std::string, std::list<Product*>>::iterator cIt;
     for (cIt = cart_.begin(); cIt != cart_.end(); ++cIt){
         cIt -> second.clear();
     }
@@ -127,7 +127,7 @@ void MyDataStore::dump(std::ostream &ofile)
 void MyDataStore::addToCart(std::string username, Product* p){
     User* currUser = findUser(username);
     if (currUser){
-        cart_[currUser].push_back(p);
+        cart_[username].push_back(p);
     }
     else {
         std::cout << "Invalid request" << std::endl;
@@ -138,7 +138,7 @@ void MyDataStore::viewCart(std::string username){
     User* currUser = findUser(username);
     if (currUser){
         //int index = 1;
-        for (Product *p : cart_[currUser]){
+        for (Product *p : cart_[username]){
             std::cout << "name: " << p -> getName() << "," << std::endl;
             std::cout << "info: " << p -> displayInfo() << "," << std::endl;
             std::cout << "stock: " << p -> getQty() << "," << std::endl;
@@ -156,13 +156,13 @@ void MyDataStore::viewCart(std::string username){
 void MyDataStore::buyCart(std::string username){
     User* currUser = findUser(username);
     if (currUser){
-        std::list<Product*>::iterator it = cart_[currUser].begin();
-        while (it != cart_[currUser].end()){
+        std::list<Product*>::iterator it = cart_[username].begin();
+        while (it != cart_[username].end()){
             if ((currUser -> getBalance() >= (*it) -> getPrice())
                 && ((*it) -> getQty() > 0)){
                 currUser->deductAmount((*it) -> getPrice());
                 (*it)->subtractQty(1);
-                it = cart_[currUser].erase(it);
+                it = cart_[username].erase(it);
             }
             else {
                 ++it;
