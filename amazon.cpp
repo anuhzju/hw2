@@ -156,7 +156,7 @@ void displayProducts(vector<Product*>& hits)
     for(vector<Product*>::iterator it = hits.begin(); it != hits.end(); ++it) {
         cout << "Hit " << setw(3) << resultNo << endl;
         cout << (*it)->displayString() << endl;
-        cout << endl;
+        //cout << endl;
         resultNo++;
     }
 }

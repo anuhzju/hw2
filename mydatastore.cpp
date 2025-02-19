@@ -137,21 +137,20 @@ void MyDataStore::addToCart(std::string username, Product* p){
 void MyDataStore::viewCart(std::string username){
     User* currUser = findUser(username);
     if (currUser){
-        //int index = 1;
+        int index = 1;
         for (Product *p : cart_[username]){
-            std::cout << "name: " << p -> getName() << "," << std::endl;
-            std::cout << "info: " << p -> displayInfo() << "," << std::endl;
-            std::cout << "stock: " << p -> getQty() << "," << std::endl;
-            std::ostringstream os;
-            os << std::fixed << std::setprecision(2) << p -> getPrice();
-            std::cout << "price: " << os.str() << std::endl;
-            //index++;
+            std::vector<Product*> print = {p};
+            //print.push_back(p);
+            std::cout << "Item " << index << std::endl;
+            std::cout << p->displayString() << std::endl;
+            index++;
         }
     }
     else {
         std::cout << "Invalid username" << std::endl;
     }
 }
+
 
 void MyDataStore::buyCart(std::string username){
     User* currUser = findUser(username);
